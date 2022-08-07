@@ -32,18 +32,18 @@
 
      public static void frequency(String filename) 
      {
-	     char[] alph = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
-	     int fqncy[] = new int[26];
+         char[] alph = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+	 int fqncy[] = new int[26];
 
          System.out.println("LETTER FREQUENCY\n");
 
-	     String str = FileIOStr.readFile(filename); //Retrieve String from File
+	 String str = FileIOStr.readFile(filename); //Retrieve String from File
 
-	     int lenStr = str.length(); //Need Length
+	 int lenStr = str.length(); //Need Length
          char[] chArray = str.toCharArray();
 
-	     //CONVERT ALL LETTERS TO UPPER CASE
-	     for(int ltr = 0; ltr < chArray.length; ltr++)
+	 //CONVERT ALL LETTERS TO UPPER CASE
+	 for(int ltr = 0; ltr < chArray.length; ltr++)
          {
              chArray[ltr] = Character.toUpperCase(chArray[ltr]);
          }
@@ -51,15 +51,15 @@
 	     //LOOP EACH LETTER OF STRING
 	     for(int ii=0; ii < lenStr; ii++)
 	     {
-             //FIND FREQUENCY INDEX FOR A LETTER
-             for(int jj=0; jj < 26; jj++)
-	         {
-		         //LETTERS ARE EQUAL
-                 if(chArray[ii] == alph[jj])
-		         {
-	                 //ADD COUNT OF ONE
-                     fqncy[jj] = fqncy[jj] + 1;
-		         }	 
+             	//FIND FREQUENCY INDEX FOR A LETTER
+             	for(int jj=0; jj < 26; jj++)
+	        {
+		    //LETTERS ARE EQUAL
+                    if(chArray[ii] == alph[jj])
+		    {
+	                //ADD COUNT OF ONE
+                        fqncy[jj] = fqncy[jj] + 1;
+		    }	 
 	         } 
 	     }
 
