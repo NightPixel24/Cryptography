@@ -39,10 +39,10 @@
 
              while (line != null)	//While not end-of-file process and read lines
              {   
-	             wordRead += line; //returned string of csv line add to string
+	         wordRead += line; //returned string of csv line add to string
 		
                  line = bufRdr.readLine();	//Read next line
-          	     lineNum++;
+          	 lineNum++;
              }
              fileStrm.close();		//Clean up the stream
          }
