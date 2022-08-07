@@ -25,10 +25,10 @@
          BufferedReader bufRdr;
         
          int lineNum;
-	     String wordRead = ""; //String
+	 String wordRead = ""; //String
          String line;
         
-	     try
+	 try
          {
              fileStrm = new FileInputStream(inFile); //Open the file
              rdr = new InputStreamReader(fileStrm);	//Creates Reader to read the stream
@@ -67,31 +67,31 @@
      public static void writeFile (String infilename, String msgWrite)
      {
          FileOutputStream fileStrm = null;
-	     PrintWriter pw;
+	 PrintWriter pw;
 
-	     try
+	 try
          {
-             fileStrm = new FileOutputStream(infilename); //Open file for writing
-	         pw = new PrintWriter(fileStrm); //Initialise Writer
+              fileStrm = new FileOutputStream(infilename); //Open file for writing
+	      pw = new PrintWriter(fileStrm); //Initialise Writer
 
-	         //WRITE MSG TO FILE
-             pw.println(msgWrite);
+	      //WRITE MSG TO FILE
+              pw.println(msgWrite);
 
-	         pw.close(); //Clean Up Stream
-	     }
-	     catch(IOException e)
-	     {
-	         if(fileStrm != null) 
-             {
-	             try
-		         {
-	                 fileStrm.close();
-		         }
-		         catch(IOException ex2) {}
-	         }
+	      pw.close(); //Clean Up Stream
+	  }
+	  catch(IOException e)
+	  {
+	       if(fileStrm != null) 
+               {
+	           try
+		   {
+	               fileStrm.close();
+		   }
+		   catch(IOException ex2) {}
+	       }
              
-             //Throw Exception
-	         System.out.println("Error in writing to file: " + e.getMessage());
-         }
+               //Throw Exception
+	       System.out.println("Error in writing to file: " + e.getMessage());
+          }
      }
 }
