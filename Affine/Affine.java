@@ -23,41 +23,41 @@
  {
      public static void main(String[] args)
      {
-     	//KEYS INPUT
-	 	int numA, numB; 
-	 	String cipher;
-	 	boolean checkValid = true;
-	 	do
-	 	{
-     		Scanner sc = new Scanner(System.in);
+     	 //KEYS INPUT
+	 int numA, numB; 
+	 String cipher;
+	 boolean checkValid = true;
+	 do
+	 {
+     	     Scanner sc = new Scanner(System.in);
 
-	        System.out.println("Please Enter Key A");
-            numA = sc.nextInt();
+	     System.out.println("Please Enter Key A");
+             numA = sc.nextInt();
 
-	        System.out.println("Please Enter Key B");
-            numB = sc.nextInt();
+	     System.out.println("Please Enter Key B");
+             numB = sc.nextInt();
 		 
-	        //TEST PRINT
-            checkValid = ValidKey.valid(numA, numB);
+	     //TEST PRINT
+             checkValid = ValidKey.valid(numA, numB);
 
-	     }while(checkValid == false);
+	 }while(checkValid == false);
 	 
-	     //ENCRYPTION - FILEIO SAVE
-	     cipher = encrypt("testfile-Affine.txt", numA, numB);
+	 //ENCRYPTION - FILEIO SAVE
+	 cipher = encrypt("testfile-Affine.txt", numA, numB);
          
          //DECRYPTION - FILEIO SAVE
-	     decrypt(cipher, numA, numB);
+	 decrypt(cipher, numA, numB);
      }
 
      //ENCRYPTION
      public static String encrypt(String filename, int a, int b)
      {
-	     int letter = 0;
-	     int result = 0;
-	     char ciphLetter = 'a';
-	     String cipherText = "";
+         int letter = 0;
+	 int result = 0;
+	 char ciphLetter = 'a';
+	 String cipherText = "";
 
-	     //READ IN PLAINTEXT MSG
+	 //READ IN PLAINTEXT MSG
          String msg = FileIOStr.readFile(filename);
          
          //CREATE CHAR ARRAY
@@ -65,176 +65,174 @@
          int strlen = chArray.length;
 
 
-	     //LOOP THROUGH EACH LETTER
+	 //LOOP THROUGH EACH LETTER
          for(int ii=0; ii < strlen; ii++)
-	     {
+	 {
              //CNVRT LETTER TO INT
-	         letter = chArray[ii];
+	     letter = chArray[ii];
 
-	         //ACCOUNT FOR UPPERCASE/LOWERCASE
-	         if((letter >= 65) && (letter <= 90))
+	     //ACCOUNT FOR UPPERCASE/LOWERCASE
+	     if((letter >= 65) && (letter <= 90))
              {
-		         //UPPERCASE LETTER
-	             letter = letter - 65;
+	         //UPPERCASE LETTER
+	         letter = letter - 65;
                  //ENCRYPT FORMULA
-	             //c = f(m) = (a m + b) mod 27
-	             result = ((a * letter) + b) % 27;
+	         //c = f(m) = (a m + b) mod 27
+	         result = ((a * letter) + b) % 27;
                  
-	             //CNVRT BACK TO ASCII CHAR
-	             ciphLetter = (char) (result + 65); 
+	         //CNVRT BACK TO ASCII CHAR
+	         ciphLetter = (char) (result + 65); 
 
-	             //CIPHER TEXT STRING CREATION
-		         cipherText = cipherText + ciphLetter; 
-	         }
-	         else if((letter >= 97) && (letter <= 122))
-             {
-                 //LOWERCASE LETTER
-		         letter = letter - 97;
+	         //CIPHER TEXT STRING CREATION
+		 cipherText = cipherText + ciphLetter; 
+	      }
+	      else if((letter >= 97) && (letter <= 122))
+              {
+                   //LOWERCASE LETTER
+		   letter = letter - 97;
 		 
-		         //ENCRYPT FORMULA
-	             //c = f(m) = (a m + b) mod 27
-	             result = ((a * letter) + b) % 27;
+		   //ENCRYPT FORMULA
+	           //c = f(m) = (a m + b) mod 27
+	           result = ((a * letter) + b) % 27;
              
-	             //CNVRT BACK TO ASCII CHAR
-	             ciphLetter = (char) (result + 97); 
+	           //CNVRT BACK TO ASCII CHAR
+	           ciphLetter = (char) (result + 97); 
 
-	             //CIPHER TEXT STRING CREATION
-		         cipherText = cipherText + ciphLetter; 
-	         }
-	         else
-	         {
-	             //SKIP LETTER
+	           //CIPHER TEXT STRING CREATION
+		   cipherText = cipherText + ciphLetter; 
+	      }    
+	      else
+	      {
+	            //SKIP LETTER
 		 
-		         //SPACES ONLY
-		         /*if(letter == 32)
-	               {
-	                   ciphLetter = (char) letter;
-                       cipherText = cipherText + ciphLetter;
-		           }*/
+		    //SPACES ONLY
+		    /*if(letter == 32)
+	            {
+	                 ciphLetter = (char) letter;
+                         cipherText = cipherText + ciphLetter;
+		    }*/
 
-		         //OR
+		    //OR
 
-		         //ADD LETTER TO STRING
+		    //ADD LETTER TO STRING
 	          	
-		         ciphLetter = (char) letter;
-		         cipherText = cipherText + ciphLetter; 
-		 
-             }
+		    ciphLetter = (char) letter;
+		    cipherText = cipherText + ciphLetter; 		 
+               }    
 
          }
 
-	     //WRITE CIPHER TEXT TO FILE
-	     FileIOStr.writeFile("Encrypt.txt", cipherText);
+	 //WRITE CIPHER TEXT TO FILE
+	 FileIOStr.writeFile("Encrypt.txt", cipherText);
 
-	     return cipherText;
+	 return cipherText;
      }
 
      //DECRYPTION
      public static String decrypt(String msg, int a, int b)
      {
-	    int result = 0;
-	    int aInv = 0;
-	    char letter = 'e';
-	    int ascii = 0;
-	    int placeholder = 0;
-	    int placeholder2 = 0;
-	    int decryptLetter = 0;
-	    String plainText = "";
+         int result = 0;
+	 int aInv = 0;
+	 char letter = 'e';
+	 int ascii = 0;
+	 int placeholder = 0;
+	 int placeholder2 = 0;
+	 int decryptLetter = 0;
+	 String plainText = "";
         
-        int len = msg.length();
-        char[] chArray = msg.toCharArray();
+         int len = msg.length();
+         char[] chArray = msg.toCharArray();
 
-	    //FIND a^-1
-	    //aa^-1 MOD 27 = 1
+	 //FIND a^-1
+	 //aa^-1 MOD 27 = 1
 
-	    //LOOOP THROUGH 1-26 KEY POSSIBILITIES
-	    for(int ii = 1; ii < 27; ii++)
-	    {  
-	        //USE FORMULA
-	        result = (a*ii) % 27;
+	 //LOOOP THROUGH 1-26 KEY POSSIBILITIES
+	 for(int ii = 1; ii < 27; ii++)
+	 {  
+	      //USE FORMULA
+	      result = (a*ii) % 27;
             
-	        //A INVERSE FOUND - SAVED
-	        if(result == 1)
-            {
-                aInv = ii;
-            }
-	    }
+	      //A INVERSE FOUND - SAVED
+	      if(result == 1)
+              {
+                  aInv = ii;
+              }
+	 }
 	    
-        //DECRYPT FORMULA
-	    //m =f^-1(c) = a^-1 (c - b) mod 27
+         //DECRYPT FORMULA
+	 //m =f^-1(c) = a^-1 (c - b) mod 27
 
-	    //FOR EACH LETTER IN CIPHER TEXT
-        for(int jj = 0; jj < len; jj++)
+	 //FOR EACH LETTER IN CIPHER TEXT
+         for(int jj = 0; jj < len; jj++)
+	 {
+             //CONVERT LETTER TO INT
+             ascii = chArray[jj];
+             if((ascii >= 65) && (ascii <= 91)) //CAPITAL
+             {
+                 //ACCOUNT FOR ASCII VALUE
+                 ascii = ascii - 65;
+	         
+		 //FORMULA DECRYPT
+		 placeholder = ascii - b;
+                 placeholder2 = (aInv * placeholder);
+
+                 //IF NEGATIVE MODULAR
+		 while(placeholder2 < 27)
+	         {
+                     placeholder2 = placeholder2 + 27;
+		 }
+		     decryptLetter = placeholder2 % 27;
+
+	         //CNVRT TO ASCII (MAPPING)
+		 letter = (char) (decryptLetter + 65);
+
+		 //ADD LETTER TO PLAINTEXT STRING
+		 plainText = plainText + letter;
+	    }
+	    else if((ascii >= 97) && (ascii <= 123)) //LOWERCASE
 	    {
-            //CONVERT LETTER TO INT
-            ascii = chArray[jj];
-            if((ascii >= 65) && (ascii <= 91)) //CAPITAL
-            {
-                //ACCOUNT FOR ASCII VALUE
-                ascii = ascii - 65;
-	         
-		        //FORMULA DECRYPT
-		        placeholder = ascii - b;
-                placeholder2 = (aInv * placeholder);
-
-                //IF NEGATIVE MODULAR
-		        while(placeholder2 < 27)
-	            {
-                    placeholder2 = placeholder2 + 27;
-		        }
-		        decryptLetter = placeholder2 % 27;
-
-	            //CNVRT TO ASCII (MAPPING)
-		        letter = (char) (decryptLetter + 65);
-
-		        //ADD LETTER TO PLAINTEXT STRING
-		        plainText = plainText + letter;
-	        }
-	        else if((ascii >= 97) && (ascii <= 123)) //LOWERCASE
-	        {
-
-                //ACCOUNT FOR ASCII VALUE
-                ascii = ascii - 97;
+                 //ACCOUNT FOR ASCII VALUE
+                 ascii = ascii - 97;
                  
-		        //FORMULA DECRYPT
-		        placeholder = ascii - b;
-                placeholder2 = (aInv * placeholder);
+		 //FORMULA DECRYPT
+		 placeholder = ascii - b;
+                 placeholder2 = (aInv * placeholder);
 
-		        //IF NEGATIVE MODULAR
-		        while(placeholder2 < 27)
-	            {
-                    placeholder2 = placeholder2 + 27;
-		        }
-		        decryptLetter = placeholder2 % 27;
+		 //IF NEGATIVE MODULAR
+		 while(placeholder2 < 27)
+	         {
+                     placeholder2 = placeholder2 + 27;
+		 }
+		 decryptLetter = placeholder2 % 27;
 	         
-		        //CNVRT TO ASCII (MAPPING)
-		        letter = (char) (decryptLetter + 97);
+		 //CNVRT TO ASCII (MAPPING)
+		 letter = (char) (decryptLetter + 97);
 
-		        //ADD LETTER TO PLAINTEXT STRING
-		        plainText = plainText + letter;
-	        }
-	        else
+		 //ADD LETTER TO PLAINTEXT STRING
+		 plainText = plainText + letter;
+	    }
+	    else
             {
                 //SKIP LETTER
 		 
-		        /*SPACES ONLY
-		        if(ascii == 32)
-	            {
-	                letter = (char) ascii;
+		/*SPACES ONLY
+		if(ascii == 32)
+	        {
+	            letter = (char) ascii;
                     plainText = plainText + letter;
-		        }*/
+		}*/
 
-		        //OR
+		//OR
 
-		        //ADD LETTER TO STRING
+		//ADD LETTER TO STRING
 	         	
-		        letter = (char) ascii;
-		        plainText = plainText + letter; 		 
-	        }             
-	    }
+		    letter = (char) ascii;
+		    plainText = plainText + letter; 		 
+	    }             
+	}
 
-	        FileIOStr.writeFile("Decrypt.txt", plainText);
+	 FileIOStr.writeFile("Decrypt.txt", plainText);
 
-	        return plainText;
+	 return plainText;
      }
 }
