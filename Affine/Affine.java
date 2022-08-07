@@ -9,9 +9,6 @@
  *        - Calc Valid Keys (user input)
  *        - FileIO class to read and write message
  *
- *        - Sorry for indenting if it looks weird I did this on my laptop because
- *          Covid 19 and could not come to the labs to check if it was well formatted 
- *          for those specific PC's
  *        
  *        - Letters A - Z, 65-90 plus [91
  *        - Letters a - z, 97-122 plus {123
@@ -26,22 +23,22 @@
  {
      public static void main(String[] args)
      {
-         //KEYS INPUT
-	     int numA, numB; 
-	     String cipher;
-	     boolean checkValid = true;
-	     do
-	     {
-             Scanner sc = new Scanner(System.in);
+     	//KEYS INPUT
+	 	int numA, numB; 
+	 	String cipher;
+	 	boolean checkValid = true;
+	 	do
+	 	{
+     		Scanner sc = new Scanner(System.in);
 
-	         System.out.println("Please Enter Key A");
-             numA = sc.nextInt();
+	        System.out.println("Please Enter Key A");
+            numA = sc.nextInt();
 
-	         System.out.println("Please Enter Key B");
-             numB = sc.nextInt();
+	        System.out.println("Please Enter Key B");
+            numB = sc.nextInt();
 		 
-	         //TEST PRINT
-             checkValid = ValidKey.valid(numA, numB);
+	        //TEST PRINT
+            checkValid = ValidKey.valid(numA, numB);
 
 	     }while(checkValid == false);
 	 
