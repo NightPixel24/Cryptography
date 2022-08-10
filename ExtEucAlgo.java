@@ -38,9 +38,6 @@
 	      //a = 0, GCD is b
 	      result = b;
 	  }
-
 	  return result;
      }   
  } 
-
-
