@@ -17,7 +17,7 @@
  {
 
     public static void main (String[] args)
-    {/*
+    {
 	 //PRINT ENCRYPTION
          System.out.println("PRINTING ENCRYPTION");
          System.out.println(encrypt("HEY BUDDY"));
@@ -33,7 +33,6 @@
 	 System.out.println(decrypt(encrypt("THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG")));
          System.out.println();
 
-     */ 
          System.out.println(encrypt("THIS IS A SECRET MSG"));
 	 System.out.println(decrypt(encrypt("THIS IS A SECRET MSG")));
     }
