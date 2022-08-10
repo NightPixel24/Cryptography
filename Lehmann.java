@@ -40,7 +40,4 @@
 	 
 	 return result;
      }
-
-
-
  }
